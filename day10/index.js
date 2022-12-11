@@ -5,8 +5,8 @@ let X = 1;
 let intervals = [20,60,100,140,180,220];
 let strength = 0;
 
-// let oldInstruction = null;
 let instructions = [];
+let screenArray = [];
 
 function executeAsyncInstruction() {
     let instr = instructions.shift();
@@ -32,13 +32,28 @@ async function compute1() {
         }
 
     }
-    for(let i=2; i<=220; i++) {
-        executeAsyncInstruction();
-        if(intervals.includes(i)) {
-            strength += (i*X);
+    for(let i=1; i<=240; i++) {
+        if(i>1) {
+            executeAsyncInstruction();
+        }
+        if(i>1 && i< 221) {
+            if(intervals.includes(i)) {
+                strength += (i*X);
+            }
+        }
+        if(i%40 === 1) {
+            screenArray.push('\n')
+        }
+        if(i%40 >= X && i%40 <=X+2) {
+            screenArray.push('#');
+        } else {
+            screenArray.push('.')
         }
     }
     console.log(`Result is ${strength}`)
+    console.log(screenArray,
+        
+        screenArray.join(''))
 }
 
 compute1()
